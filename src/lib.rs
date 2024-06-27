@@ -61,7 +61,7 @@ impl Plugin for Gain {
         aux: &mut nih_plug::prelude::AuxiliaryBuffers,
         context: &mut impl nih_plug::prelude::ProcessContext<Self>,
     ) -> nih_plug::prelude::ProcessStatus {
-        todo!()
+        ProcessStatus::Normal
     }
 
     const MIDI_INPUT: nih_plug::prelude::MidiConfig = nih_plug::prelude::MidiConfig::None;
