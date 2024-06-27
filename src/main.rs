@@ -1,3 +1,7 @@
+use nih_plug::prelude::*;
+
+use rust_vst_plugin::Gain;
+
 fn main() {
-    println!("Hello, world!");
+    nih_export_standalone::<Gain>();
 }

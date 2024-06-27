@@ -2,7 +2,14 @@
 name = "rust-vst-plugin"
 version = "0.1.0"
 edition = "2021"
+authors = ["Jan Wilczek"]
+description = "A simple GUI gain plugin"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+# cdylib is for VST3 (?)
+# lib is for standalone
+crate-type = ["cdylib", "lib"]
 
 [dependencies]
+nih_plug = { git = "https://github.com/robbert-vdh/nih-plug.git", features = ["assert_process_allocs", "standalone"] }
+
