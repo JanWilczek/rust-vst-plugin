@@ -3,6 +3,8 @@ use std::num::NonZeroU32;
 use nih_plug::prelude::*;
 use std::sync::Arc;
 
+mod editor;
+
 pub struct Gain {
     parameters: Arc<GainParameters>,
 }
@@ -78,7 +80,7 @@ impl Plugin for Gain {
     }
 
     fn editor(&mut self, async_executor: nih_plug::prelude::AsyncExecutor<Self>) -> Option<Box<dyn nih_plug::prelude::Editor>> {
-        None
+        editor::create()
     }
 
     fn filter_state(state: &mut nih_plug::prelude::PluginState) {}
