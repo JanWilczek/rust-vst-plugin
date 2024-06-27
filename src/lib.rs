@@ -63,6 +63,13 @@ impl Plugin for Gain {
         aux: &mut nih_plug::prelude::AuxiliaryBuffers,
         context: &mut impl nih_plug::prelude::ProcessContext<Self>,
     ) -> nih_plug::prelude::ProcessStatus {
+
+        for channel_samples in buffer.iter_samples() {
+            for sample in channel_samples {
+                *sample = 0.0;
+            }
+        }
+        
         ProcessStatus::Normal
     }
 
@@ -98,3 +105,13 @@ impl Plugin for Gain {
 
     fn deactivate(&mut self) {}
 }
+
+impl Vst3Plugin for Gain {
+    const VST3_CLASS_ID: [u8; 16] = *b"WolfSoundGain001";
+
+    const VST3_SUBCATEGORIES: &'static [Vst3SubCategory] = &[
+        Vst3SubCategory::Fx, Vst3SubCategory::Tools
+    ];
+}
+
+nih_export_vst3!(Gain);
