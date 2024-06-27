@@ -1,10 +1,32 @@
 use std::num::NonZeroU32;
 
-use nih_plug::{audio_setup::AudioIOLayout, plugin::Plugin};
+use nih_plug::prelude::*;
+use std::sync::Arc;
 
-#[derive(Default)]
 pub struct Gain {
+    parameters: Arc<GainParameters>,
+}
 
+#[derive(Params)]
+struct GainParameters {
+    #[id = "gain"]
+    pub gain: FloatParam,
+}
+
+impl Default for Gain {
+    fn default() -> Self {
+        Self {
+            parameters: Arc::new(GainParameters::default()),
+        }
+    }
+}
+
+impl Default for GainParameters {
+    fn default() -> Self {
+        Self {
+            gain: FloatParam::new("Gain", 1.0, FloatRange::Linear { min: 0.0, max: 1.0 }),
+        }
+    }
 }
 
 impl Plugin for Gain {
@@ -30,7 +52,7 @@ impl Plugin for Gain {
     type BackgroundTask = ();
 
     fn params(&self) -> std::sync::Arc<dyn nih_plug::prelude::Params> {
-        todo!()
+        return self.parameters.clone()
     }
 
     fn process(
