@@ -2,10 +2,11 @@
 
 ## Requirements
 
-- [ ] Gain plugin
+- [x] Gain plugin
 - [ ] Audio processing
-- [ ] (GUI) A slider [-100, 20] dBFS range
-- [ ] VST3 format
+- [x] GUI
+- [ ] A slider [-100, 20] dBFS range
+- [x] VST3 format
 
 ### Nice-to-have
 
