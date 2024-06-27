@@ -10,7 +10,7 @@ pub(crate) fn create() -> Option<Box<dyn Editor>> {
 }
 
 struct GainEditor {
-
+    context: Arc<dyn GuiContext>,
 }
 
 impl IcedEditor for GainEditor {
@@ -22,13 +22,15 @@ impl IcedEditor for GainEditor {
 
     fn new(
         _initialization_flags: Self::InitializationFlags,
-        _context: Arc<dyn GuiContext>,
+        context: Arc<dyn GuiContext>,
     ) -> (Self, Command<Self::Message>) {
-        (GainEditor{}, Command::none())
+        (GainEditor{
+            context: context,
+        }, Command::none())
     }
 
     fn context(&self) -> &dyn GuiContext {
-        todo!()
+        self.context.as_ref()
     }
 
     fn update(
@@ -36,10 +38,14 @@ impl IcedEditor for GainEditor {
         window: &mut WindowQueue,
         message: Self::Message,
     ) -> Command<Self::Message> {
-        todo!()
+        Command::none()
     }
 
     fn view(&mut self) -> Element<'_, Self::Message> {
-        todo!()
+        Column::new()
+            .align_items(Alignment::Center)
+            .push(Text::new("WolfSound's Gain Plugin in Rust 🐺")
+                    .size(50))
+            .into()
     }
 }
